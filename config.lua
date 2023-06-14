@@ -1,32 +1,99 @@
 Config = {}
-
-
 -------------------------------------------
 ----------------- River -------------------
 -------------------------------------------
 
-
-Config.Meta_Data = true -- If you use Metadata you Only need youre Item. (If false, Script use a Old Way and give you Canteen_75, Canteen_50 and so far back)
-                         -- (This Option Requieres Server Restart cauz Inventory can load Metadata of items)
-
-
 Config.Check_Canteen = true -- Check if Character has Canteen Item.
-Config.River_Command = false -- If False River Prompt shows automatic if you near River and if you use Command Prompt Disable. If true use Command to show River Options.
+Config.RiverCommand = true -- If true River Prompt shows automatic if you near River and if you use Command Prompt Disable. If false use Command to show River Options.
 Config.CleanRiver = true -- Clean Character from Dirt if you wash on River.
-Config.Standard_Drink = true -- Use the Drink animation and Filling Cores from Cry_River. Requieres Fred_Metabolism to add Thirst Points! 
+Config.StandardDrink = true -- Use the Drink animation and Filling Cores from Cry_River. Requieres Fred_Metabolism or Outsider_Needs to add Thirst Points! 
                             -- If false u have to add: canteen_100, canteen_75, canteen_50 and canteen_25 to youre Metabolism.
-                            -- If you use Metadata only add: canteen_100 
-
-Config.Fred_Meta = true     -- If you use Fred Meta
-
+                            -- If you use Metadata only add: canteen_100
+                            
+        -- Barrels
 Config.Water_Barrels = true -- If using Waterbarrels + Animation
 Config.CleanBarrel = true   -- Clean Character if Players use Waterbarrels. 
 
+Config.Vorp_Progressbars = false -- If use Vorp_Progressbars
 
-Config.Syn_Progressbars = true -- If use Syn_Progressbars
-                               -- Export in Client is:         exports['progressBars']:startUI(8000, "Du füllst deine Flasche...")
 
-Config.Dirty_Water = true -- If you want that u get a Dirty Water Canteen from River (Its Not Drinkable) for craftig/or boiling it to have Clear Water.
+-------------------------------------------
+---------  Metabolsism Options  -----------
+-------------------------------------------
+
+-- ONLY ONE OPTION FRED OR OUTSIDER NEEDS --
+
+Config.Fred_Meta = false     -- If you use Fred Meta
+
+Config.FredMetaPoints = {
+    FredRiver = 25, -- How much thirst Points fill drinking on River ? Only if use Fred Meta.
+    FredCanteen = 100, -- Huch thirst Points fill the Canteen while drinking? Only if use Fred Meta
+}
+
+Config.Outsider_Needs = true -- If you use outsider_needs
+-- River
+Config.OutsiderNeedsStatsFromRiver = {
+    FoodUp = 0,
+    WaterUp = 25,
+    StaminaUp = 20,
+    HealthUp = 0,
+    GoldHealthInnerUp = 0,
+    GoldHealthOutterUp = 0,
+    GoldStaminaInnerUp = 5,
+    GoldStaminaOutterUp = 5,
+    AddHotUp = 0,
+    AddCoolUp = 6,
+    AddHotDurationUp = 0,
+    AddCoolDurationUp = 120
+}
+
+-- Flask 
+Config.OutsiderNeedsStatsFromFlask = {
+    FoodUp = 0,
+    WaterUp = 25,
+    StaminaUp = 20,
+    HealthUp = 0,
+    GoldHealthInnerUp = 0,
+    GoldHealthOutterUp = 0,
+    GoldStaminaInnerUp = 0,
+    GoldStaminaOutterUp = 0,
+    AddHotUp = 0,
+    AddCoolUp = 4,
+    AddHotDurationUp = 0,
+    AddCoolDurationUp = 120
+}
+
+-------------------------------------------
+---  Goldpan/Sickness/Metadata Options  ---
+-------------------------------------------
+Config.Meta_Data = 1 -- (1 = Use Metadata, 2 =  then Script use a Old Way and give you Canteen_75, Canteen_50 and so far back), 3 = Do Nothing. If youre Metabolism Script Managa all of it. 
+                     -- (This Option Requieres Server Restart cauz Inventory can load Metadata of items)
+Config.Mega_Doctorjob = true -- Only if you use Mega_Doctorjob.
+Config.Dirty_WaterDrinkable = true -- Sets Dirty Water Drinkable for DiseaseChance. If metadata = true it use the same from Config.RiverTexts
+Config.DirtyCanteenDiseaseChance = 5 -- Percentage out of 100 Chance to get Diseasefrom Dirty_WaterBottle (Only if Mega_Doctorjob true)
+Config.DiseaseID = "cholera"  -- Youre DiseaseID (Only if Mega_Doctorjob true)
+Config.GetDirtyCanteenChance = 50 -- Chance to get Dirty Canteen if you set dirtycanteen down below to 3
+-- Config.UseGoldpanMetadata = true -- This Option comes Later. At the moment goldpansystem always use metadata
+
+
+Config.RiverTexts = {
+    Broken = "Flasche ist leer!", -- Msg if Canteen is empty 
+    Durability = "Füllstand = ", -- How much filled is Flask
+    Max = 900,  -- How much can be inside Canteen
+    Lost = 150,  -- How much loose per Drink
+
+    -- Goldpan --      More options later.
+    BrokenPan = "Goldpfanne zerbrochen!",
+    DurabilityPan = "Haltbarkeit = ",
+    MaxPan = 100,
+    LostPan = 1,
+
+    -- Customize youre Progressbars -- (Only if you use it) Theme: linear, circle, innercircle | Color: What color (hex or rgb) do you want the progress loader to be. Defaults to a dark red. 
+    Theme = 'circle',
+    Color = '#ff0000',
+    width = '20vw',
+}
+
 Config.RiverCanteen = {                         
     CanteenItem = "canteen_100", -- If you have youre own canteen Item.
     CanteenItem_75 = "canteen_75",
@@ -41,21 +108,69 @@ Config.RiverCanteen = {
 
 }
 
-Config.Mega_Doctorjob = true -- Only if you use Mega_Doctorjob.
-Config.RiverDiseaseChance = 5 -- Percentage out of 100 (Only if Mega_Doctorjob true)
-Config.Dirty_WaterDrinkable = true -- Sets Dirty Water Drinkable for DiseaseChance. If metadata = true it use the same from Config.RiverTexts
-Config.DirtyCanteenDiseaseChance = 5 -- Percentage out of 100 Chance to get Diseasefrom Dirty_WaterBottle (Only if Mega_Doctorjob true)
-Config.DiseaseID = "cholera"  -- Youre DiseaseID (Only if Mega_Doctorjob true)
-
--- Metadata/Text -- 
-Config.RiverTexts = {
-    Broken = "Flasche ist leer!", -- Msg if Canteen is empty 
-    Durability = "Füllstand = ", -- How much filled is Flask
-    Max = 900,  -- How much can be inside Canteen
-    Lost = 300,  -- How much loose per Drink
-    FredRiver = 25, -- How much thirst Points fill drinking on River ? Only if use Fred Meta.
-    FredCanteen = 100, -- Huch thirst Points fill the Canteen while drinking? Only if use Fred Meta
+Config.GoldPanOption = true -- If you want to youse Goldpanning from River.
+Config.PromtTimerGoldpan = 11800 -- In MS. If you change the worktimer down below it can be good if you change this timer to. Its the time how long the prompts wait before become back after pushing Goldpanning button.
+Config.Options = {
+    WorkTimer = 5,--seconds
+    PanModel = "P_CS_MININGPAN01X",
+    BoneIndex = "SKEL_R_HAND",
+    PanAttach = {0.25, 0.01, -0.09, 0.0, -1.0, 91.0},
+    StartPanningInfo = {"script_rc@cldn@ig@rsc2_ig1_questionshopkeeper", "inspectfloor_player", 0.2, 0.0, -0.2, -100.0, -50.0, 0.0},
+    StartShakeInfo = {"script_re@gold_panner@gold_success", "SEARCH02"},
+    GoldNuggetName = "goldnugget", --RewardItem Name for Goldsearch
 }
+
+Config.GoldPanItem = "goldpan"
+Config.UseRustedGoldpan = true -- After Metadata = 0 Goldpan dont break it give you an rusted Golpan back.
+Config.RustedGoldpanItem = "rusted_goldpan"
+
+Config.WaterTypes = { -- droprate: 0 = nothing; 1 = very rare; 2 = rare; 3 = common 
+                      -- sick: chance in % to get sick when drinking from river If you dont have mega doctorjob you can ignore this
+                      -- dirtycanteen: 0 = normal water; 1 = Dirty Water (like for craftig); 2 = Random (You can set percentage with the GetDirtyCanteenChance Option)
+    --lakes
+    [1] =  {["hash"] = `WATER_AURORA_BASIN`,       ["name"] = "Aurora Basin", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [2] =  {["hash"] = `WATER_BARROW_LAGOON`,      ["name"] = "Barrow Lagoon", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 10, ["dirtycanteen"] = 1},
+    [3] =  {["hash"] = `WATER_CALMUT_RAVINE`,      ["name"] = "Calmut Ravine", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [4] =  {["hash"] = `WATER_ELYSIAN_POOL`,       ["name"] = "Elysian Pool", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 5, ["dirtycanteen"] = 1},
+    [5] =  {["hash"] = `WATER_FLAT_IRON_LAKE`,     ["name"] = "Flat Iron Lake", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [6] =  {["hash"] = `WATER_HEARTLANDS_OVERFLOW`,["name"] = "Heartlands Overflow", ["type"] = "lake", ["droprate"] = 2, ["sick"]= 10, ["dirtycanteen"] = 1},
+    [7] =  {["hash"] = `WATER_LAKE_DON_JULIO`,     ["name"] = "Don Julio Lake", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 25, ["dirtycanteen"] = 1},
+    [8] =  {["hash"] = `WATER_LAKE_ISABELLA`,      ["name"] = "Lake Isabella", ["type"] = "lake", ["droprate"] = 2, ["sick"]= 1, ["dirtycanteen"] = 0},
+    [9] =  {["hash"] = `WATER_O_CREAGHS_RUN`,      ["name"] = "Ocreaghs Run", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 5, ["dirtycanteen"] = 0},
+    [10] = {["hash"] = `WATER_OWANJILA`,          ["name"] = "Owanjila", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 9, ["dirtycanteen"] = 1},
+    [11] = {["hash"] = `WATER_SEA_OF_CORONADO`,   ["name"] = "Sea of Coronado", ["type"] = "lake", ["droprate"] = 1, ["sick"]= 25, ["dirtycanteen"] = 1},
+    --rivers
+    [12] = {["hash"] = `WATER_ARROYO_DE_LA_VIBORA`,   ["name"] = "Arroyo de la Vibora", ["type"] = "river", ["droprate"] = 1, ["sick"]= 35, ["dirtycanteen"] = 1},
+    [13] = {["hash"] = `WATER_BEARTOOTH_BECK`,   ["name"] = "Beartooth Beck", ["type"] = "river", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [14] = {["hash"] = `WATER_DAKOTA_RIVER`,   ["name"] = "Dakota River", ["type"] = "river", ["droprate"] = 1, ["sick"]= 5, ["dirtycanteen"] = 0},
+    [15] = {["hash"] = `WATER_KAMASSA_RIVER`,   ["name"] = "Kamassa River", ["type"] = "river", ["droprate"] = 0, ["sick"]= 15, ["dirtycanteen"] = 1},
+    [16] = {["hash"] = `WATER_LANNAHECHEE_RIVER`,   ["name"] = "Lannahechee River", ["type"] = "river", ["droprate"] = 2, ["sick"]= 100, ["dirtycanteen"] = 1},
+    [17] = {["hash"] = `WATER_LITTLE_CREEK_RIVER`,   ["name"] = "Little Creek River", ["type"] = "river", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [18] = {["hash"] = `WATER_LOWER_MONTANA_RIVER`,   ["name"] = "Lower Montana River", ["type"] = "river", ["droprate"] = 1, ["sick"]= 5, ["dirtycanteen"] = 0},
+    [19] = {["hash"] = `WATER_SAN_LUIS_RIVER`,   ["name"] = "San Luis River", ["type"] = "river", ["droprate"] = 1, ["sick"]= 10, ["dirtycanteen"] = 0},
+    [20] = {["hash"] = `WATER_UPPER_MONTANA_RIVER`,   ["name"] = "Upper Montana River", ["type"] = "river", ["droprate"] = 1, ["sick"]= 3, ["dirtycanteen"] = 0},
+    --swamps
+    [21] = {["hash"] = `WATER_BAYOU_NWA`,   ["name"] = "Bayou NWA", ["type"] = "swamp", ["droprate"] = 1, ["sick"]= 70, ["dirtycanteen"] = 1},
+    --creeks
+    [22] = {["hash"] = `WATER_DEADBOOT_CREEK`,   ["name"] = "Deadboot Creek", ["type"] = "creek", ["droprate"] = 3, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [23] = {["hash"] = `WATER_DEWBERRY_CREEK`,   ["name"] = "Dewberry Creek", ["type"] = "creek", ["droprate"] = 1, ["sick"]= 7, ["dirtycanteen"] = 1},
+    [24] = {["hash"] = `WATER_HAWKS_EYE_CREEK`,   ["name"] = "Hawks Eye Creek", ["type"] = "creek", ["droprate"] = 1, ["sick"]= 5, ["dirtycanteen"] = 0},
+    [25] = {["hash"] = `WATER_RINGNECK_CREEK`,   ["name"] = "Ringneck Creek", ["type"] = "creek", ["droprate"] = 1, ["sick"]= 10, ["dirtycanteen"] = 1},
+    [26] = {["hash"] = `WATER_SPIDER_GORGE`,   ["name"] = "Spider Gorge", ["type"] = "creek", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [27] = {["hash"] = `WATER_STILLWATER_CREEK`,   ["name"] = "Stillwater Creek", ["type"] = "creek", ["droprate"] = 1, ["sick"]= 13, ["dirtycanteen"] = 1},
+    [28] = {["hash"] = `WATER_WHINYARD_STRAIT`,   ["name"] = "Whinyard strait", ["type"] = "creek", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    --ponds
+    [29] = {["hash"] = `WATER_CAIRN_LAKE`,   ["name"] = "Cairn Lake", ["type"] = "pond", ["droprate"] = 1, ["sick"]= 10, ["dirtycanteen"] = 1},
+    [30] = {["hash"] = `WATER_CATTIAL_POND`,   ["name"] = "Cattail Pond", ["type"] = "pond", ["droprate"] = 1, ["sick"]= 5, ["dirtycanteen"] = 0},
+    [31] = {["hash"] = `WATER_HOT_SPRINGS`,   ["name"] = "Hot Springs", ["type"] = "pond", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [32] = {["hash"] = `WATER_MATTLOCK_POND`,   ["name"] = "Mattlock Pond", ["type"] = "pond", ["droprate"] = 1, ["sick"]= 15, ["dirtycanteen"] = 1},
+    [33] = {["hash"] = `WATER_MOONSTONE_POND`,   ["name"] = "Moonstone Pond", ["type"] = "pond", ["droprate"] = 1, ["sick"]= 0, ["dirtycanteen"] = 0},
+    [34] = {["hash"] = `WATER_SOUTHFIELD_FLATS`,   ["name"] = "Southfield Flats", ["type"] = "pond", ["droprate"] = 1, ["sick"]= 18, ["dirtycanteen"] = 1},
+}
+
+-------------------------------------------
+-------------------------------------------
+-------------------------------------------
 
 Config.Language = {
     -- Prompts--
@@ -67,11 +182,23 @@ Config.Language = {
     [6] = {text = "Fluss",}, --Prompt Literal String
     -- Other --
     [7] = {text = "fluss",}, -- Youre command if Config.River_Command = true
-    [8] = {text = "Du füllst deine Flasche",}, -- Progressbar Text if you use Progressbars from Syn
+    [8] = {text = "Auffüllen",}, -- Progressbar Text if you use Progressbars
     [9] = {text = "Fluss",}, -- Notify Header
     [10] = {text = "Du hast keine Leere Flasche",}, -- No Empty Bottle
     [11] = {text = "Du füllst deine Wasserflasche",}, -- You fill youre canteen
-    [12] = {text = "Du trinkst schmutziges Wasser und riskierst krank zu werden",}, -- Warning if Consume Dirty Water
+    [12] = {text = "Du trinkst Flusswasser",}, -- Warning if Consume Dirty Water
+    [13] = {text = "stopriver",}, -- STOP Aanim EMC Comand 
+    [14] = {text = "Aufhören",}, -- Cancel Key
+    -- Goldpanning --
+    [15] = {text = "Gold Suchen",}, -- Gold Panning Feature Prompt
+    [16] = {text = "Du hast keine Goldpfanne",}, -- No Golpan Message
+
+    [17] = {text = "Goldsuche",}, -- Notify Header
+    [18] = {text = "Du kannst nur in Gewässern Gold suchen!",}, -- No River Near Notify
+    [19] = {text = "Du hast etwas gefunden!",}, -- Found Something Notify
+    [20] = {text = "Nichts gefunden!",}, -- Found Nothing Notify
+    [21] = {text = "Goldnugget",}, -- Itemlabel for Notify
+    [22] = {text = "Suchen",}, -- Searchlabel for progressbar
 
 }
 
