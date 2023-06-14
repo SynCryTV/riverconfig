@@ -83,10 +83,10 @@ Config.RiverTexts = {
     Lost = 150,  -- How much loose per Drink
 
     -- Goldpan --      More options later.
-    BrokenPan = "Goldpfanne zerbrochen!",
-    DurabilityPan = "Haltbarkeit = ",
-    MaxPan = 100,
-    LostPan = 1,
+    BrokenPan = "Goldpfanne zerbrochen!", -- Msg if Pan is Broke 
+    DurabilityPan = "Haltbarkeit = ", -- Label for Iventory
+    MaxPan = 100, -- How much HP
+    LostPan = 1, -- How much loose per Pan Animation
 
     -- Customize youre Progressbars -- (Only if you use it) Theme: linear, circle, innercircle | Color: What color (hex or rgb) do you want the progress loader to be. Defaults to a dark red. 
     Theme = 'circle',
